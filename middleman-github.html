@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Github Pagesでmiddleman-blogをホストする - トリサシ日記</title>
+    <meta name="description" content="GithubでMiddlemanで作成したblogをホストしたときの手順">
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+  </head>
+  <body>
+    <div class="container">
+            <header class="global-header">
+        <a class="global-header__logo" href="/"><img src="/images/logo.jpg"></a>
+        <h2 class="global-header__title">トリサシ日記</h2>
+      </header>
+
+      <div class="content" role="main">
+        <article class="post post--single">
+          <p class="post__time">2015.09.24</p>
+          <h2 class="post__title">Github Pagesでmiddleman-blogをホストする</h2>
+          <section class="post__body">
+          <p>Middlemanとmiddleman-blogでブログを始めるにあたって、
+Github Pagesでホストしてみようと思った。</p>
+
+<p>Middlemanのインストールとmiddleman-blogのインストールについては省略。</p>
+
+<p>Middlemanのインストールについては <a href="https://middlemanapp.com/jp/basics/install" target="_blank">ここ</a>。 <br />
+middleman-blogのインストールについては <a href="https://middlemanapp.com/jp/basics/blogging/" target="_blank">ここ</a>。</p>
+
+<h2 id="section">リポジトリを用意する</h2>
+
+<p>まず、Githubにリポジトリを用意する。<br />
+リポジトリの名前を
+{ユーザー名}.github.io
+とすることで、{ユーザー名}.github.ioというURLのGithub Pageが生成される。</p>
+
+<h2 id="middleman-deploy">middleman-deployの追加</h2>
+
+<p>Gemfileに以下を追記して、bundle install する。</p>
+
+<pre><code>gem "middleman-deploy"
+</code></pre>
+
+<p>次にconfig.rbに以下を追記する。<br />
+deploy.remoteには先程作ったリポジトリを指定する。<br />
+deploy.userは指定しなくても大丈夫。（なはず）</p>
+
+<pre><code>activate :deploy do |deploy|
+  deploy.method = :git
+  deploy.remote = 'git@github-torisashi:torisashi/torisashi.github.io.git'
+  deploy.branch = 'master'
+  deploy.user  = 'torisashi' # no default
+end
+</code></pre>
+
+<h2 id="section-1">独自ドメインを設定する</h2>
+
+<p>URL {ユーザー名}.github.io を独自ドメインに変更したい場合は、<br />
+対象ドメインのAレコードに192.30.252.153と192.30.252.154を追加する。(自分はお名前で取得したので、お名前のコンパネで設定した)</p>
+
+<p>最後に、sourceディレクトリにCNAMEという名前でファイルを作成する。
+このファイルには以下のように希望するドメイン名を書いておく。</p>
+
+<pre><code>torisashi.net
+</code></pre>
+
+<p>以上で準備完了。</p>
+
+<h2 id="section-2">ビルドしてデプロイする</h2>
+<p>以下のコマンドを実行すると、build/ ディレクトリ内にhtmlが生成され、<br />
+それらがremoteリポジトリのmasterブランチpushされる。<br />
+指定したドメインにアクセスしてページは表示されていれば完了。</p>
+
+<pre><code>bundle exec middleman build
+bundle exec middleman deploy
+</code></pre>
+
+          </section>
+        </article>
+      </div>
+    
+    </div>
+        <footer class="global-footer">
+      <p class="global-footer__copy">torisashi.net</p>
+    </footer>
+
+  </body>
+</html>

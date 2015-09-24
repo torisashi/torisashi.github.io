@@ -5,7 +5,74 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <updated>2015-09-24T09:00:00+09:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Github Pagesでmiddleman-blogをホストする</title>
+    <link rel="alternate" href="http://blog.url.com/middleman-github.html"/>
+    <id>http://blog.url.com/middleman-github.html</id>
+    <published>2015-09-24T09:00:00+09:00</published>
+    <updated>2015-09-25T00:49:11+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Middlemanとmiddleman-blogでブログを始めるにあたって、
+Github Pagesでホストしてみようと思った。&lt;/p&gt;
+
+&lt;p&gt;Middlemanのインストールとmiddleman-blogのインストールについては省略。&lt;/p&gt;
+
+&lt;p&gt;Middlemanのインストールについては &lt;a href="https://middlemanapp.com/jp/basics/install" target="_blank"&gt;ここ&lt;/a&gt;。 &lt;br /&gt;
+middleman-blogのインストールについては &lt;a href="https://middlemanapp.com/jp/basics/blogging/" target="_blank"&gt;ここ&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id="section"&gt;リポジトリを用意する&lt;/h2&gt;
+
+&lt;p&gt;まず、Githubにリポジトリを用意する。&lt;br /&gt;
+リポジトリの名前を
+{ユーザー名}.github.io
+とすることで、{ユーザー名}.github.ioというURLのGithub Pageが生成される。&lt;/p&gt;
+
+&lt;h2 id="middleman-deploy"&gt;middleman-deployの追加&lt;/h2&gt;
+
+&lt;p&gt;Gemfileに以下を追記して、bundle install する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem "middleman-deploy"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次にconfig.rbに以下を追記する。&lt;br /&gt;
+deploy.remoteには先程作ったリポジトリを指定する。&lt;br /&gt;
+deploy.userは指定しなくても大丈夫。（なはず）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;activate :deploy do |deploy|
+  deploy.method = :git
+  deploy.remote = 'git@github-torisashi:torisashi/torisashi.github.io.git'
+  deploy.branch = 'master'
+  deploy.user  = 'torisashi' # no default
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="section-1"&gt;独自ドメインを設定する&lt;/h2&gt;
+
+&lt;p&gt;URL {ユーザー名}.github.io を独自ドメインに変更したい場合は、&lt;br /&gt;
+対象ドメインのAレコードに192.30.252.153と192.30.252.154を追加する。(自分はお名前で取得したので、お名前のコンパネで設定した)&lt;/p&gt;
+
+&lt;p&gt;最後に、sourceディレクトリにCNAMEという名前でファイルを作成する。
+このファイルには以下のように希望するドメイン名を書いておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;torisashi.net
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上で準備完了。&lt;/p&gt;
+
+&lt;h2 id="section-2"&gt;ビルドしてデプロイする&lt;/h2&gt;
+&lt;p&gt;以下のコマンドを実行すると、build/ ディレクトリ内にhtmlが生成され、&lt;br /&gt;
+それらがremoteリポジトリのmasterブランチpushされる。&lt;br /&gt;
+指定したドメインにアクセスしてページは表示されていれば完了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bundle exec middleman build
+bundle exec middleman deploy
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+  </entry>
 </feed>
