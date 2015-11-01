@@ -5,10 +5,105 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2015-09-24T09:00:00+09:00</updated>
+  <updated>2015-11-01T09:00:00+09:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>npmにReact Componentを公開した</title>
+    <link rel="alternate" href="http://blog.url.com/react-ordinary-calendar.html"/>
+    <id>http://blog.url.com/react-ordinary-calendar.html</id>
+    <published>2015-11-01T09:00:00+09:00</published>
+    <updated>2015-11-02T00:01:15+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;ReactとES6で何か作ってみたかったので、React Componentを作ってnpmに公開した。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.npmjs.com/package/react-ordinary-calendar" target="_blank"&gt;react-ordinary-calendar&lt;/a&gt;&lt;br /&gt;
+&lt;a href="https://github.com/torisashi/react-ordinary-calendar" target="_blank"&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;npmに何かを公開すること自体が初。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm publish
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;するだけで、npmに登録された。超簡単。&lt;br /&gt;
+npm publishできるようにするまでの手順は&lt;a href="http://qiita.com/fnobi/items/f6b1574fb9f4518ed520" target="_blank"&gt;ここ&lt;/a&gt;を参考にした。&lt;br /&gt;
+また、こんな感じで&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;"keywords": [
+  "react",
+  "component",
+  "calendar",
+  "react-component"
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;package.jsonのkeywordsに"react-component"を入れておくと&lt;a href="http://react-components.com/" target="_blank"&gt;react-components.com&lt;/a&gt;上で検索対象になる。 
+&lt;a href="http://react-components.com/component/react-ordinary-calendar" target="_blank"&gt;こんな感じ。&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回作ったreact-ordinary-componentについては以下。&lt;/p&gt;
+
+&lt;h2 id="section"&gt;インストール&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install --save-dev react-ordinary-calendar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="section-1"&gt;使い方&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;import React from 'react';
+import ReactDOM from 'react-dom';
+import Calendar from 'react-ordinary-calendar';
+
+let wrapper = document.getElementById("wrapper");
+ReactDOM.render(
+  &amp;lt;Calendar /&amp;gt;, 
+  wrapper
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでこんなカレンダーが表示される。&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="react-ordinary-calendar" src="/images/2015-11-01/react-ordinary-calendar.png" /&gt;&lt;/p&gt;
+
+&lt;h2 id="props"&gt;props&lt;/h2&gt;
+
+&lt;p&gt;propsは&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;callback&lt;/li&gt;
+  &lt;li&gt;defaultStyle&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;が使用できる。&lt;/p&gt;
+
+&lt;p&gt;'callback' propsに関数を渡すと日付のセルをクリックした際にコールバック関数として実行することができる。&lt;br /&gt;
+また、クリックしたセルの日付を取得したい場合は、コールバック関数の引数から取得することができる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  let myCallback = function(arg) {
+    console.log(arg); //e.g. 2015-11-01
+  };
+
+  ReactDOM.render(
+    &amp;lt;Calendar callback={myCallback} /&amp;gt;, 
+    wrapper
+  );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;styleを自分でなんとかしたい場合は、&lt;br /&gt;
+'defaultStyle' propsにfalseを指定すると、inline styleが適用されない。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ReactDOM.render(
+  &amp;lt;Calendar defaultStyle={false} /&amp;gt;, 
+  wrapper
+);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;普段何も考えずガンガンnpmのパッケージを使っているけど、&lt;br /&gt;
+実際どういう風に作られているのか理解できたのが一番の学びだった。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Github Pagesでmiddleman-blogをホストする</title>
     <link rel="alternate" href="http://blog.url.com/middleman-github.html"/>

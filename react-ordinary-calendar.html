@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>npmにReact Componentを公開した - トリサシ日記</title>
+    <meta name="description" content="npmにreact-ordinary-calendarというReact Componentを公開した話">
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+  </head>
+  <body>
+    <div class="container">
+            <header class="global-header">
+        <a class="global-header__logo" href="/"><img src="/images/logo.jpg"></a>
+        <h2 class="global-header__title">トリサシ日記</h2>
+      </header>
+
+      <div class="content" role="main">
+        <article class="post post--single">
+          <p class="post__time">2015.11.01</p>
+          <h2 class="post__title">npmにReact Componentを公開した</h2>
+          <section class="post__body">
+          <p>ReactとES6で何か作ってみたかったので、React Componentを作ってnpmに公開した。</p>
+
+<p><a href="https://www.npmjs.com/package/react-ordinary-calendar" target="_blank">react-ordinary-calendar</a><br />
+<a href="https://github.com/torisashi/react-ordinary-calendar" target="_blank">github</a></p>
+
+<p>npmに何かを公開すること自体が初。</p>
+
+<pre><code>npm publish
+</code></pre>
+
+<p>するだけで、npmに登録された。超簡単。<br />
+npm publishできるようにするまでの手順は<a href="http://qiita.com/fnobi/items/f6b1574fb9f4518ed520" target="_blank">ここ</a>を参考にした。<br />
+また、こんな感じで</p>
+
+<pre><code>"keywords": [
+  "react",
+  "component",
+  "calendar",
+  "react-component"
+]
+</code></pre>
+
+<p>package.jsonのkeywordsに"react-component"を入れておくと<a href="http://react-components.com/" target="_blank">react-components.com</a>上で検索対象になる。 
+<a href="http://react-components.com/component/react-ordinary-calendar" target="_blank">こんな感じ。</a></p>
+
+<p>今回作ったreact-ordinary-componentについては以下。</p>
+
+<h2 id="section">インストール</h2>
+
+<pre><code>npm install --save-dev react-ordinary-calendar
+</code></pre>
+
+<h2 id="section-1">使い方</h2>
+
+<pre><code>import React from 'react';
+import ReactDOM from 'react-dom';
+import Calendar from 'react-ordinary-calendar';
+
+let wrapper = document.getElementById("wrapper");
+ReactDOM.render(
+  &lt;Calendar /&gt;, 
+  wrapper
+);
+</code></pre>
+
+<p>これでこんなカレンダーが表示される。</p>
+
+<p><img alt="react-ordinary-calendar" src="/images/2015-11-01/react-ordinary-calendar.png" /></p>
+
+<h2 id="props">props</h2>
+
+<p>propsは</p>
+
+<ul>
+  <li>callback</li>
+  <li>defaultStyle</li>
+</ul>
+
+<p>が使用できる。</p>
+
+<p>'callback' propsに関数を渡すと日付のセルをクリックした際にコールバック関数として実行することができる。<br />
+また、クリックしたセルの日付を取得したい場合は、コールバック関数の引数から取得することができる。</p>
+
+<pre><code>  let myCallback = function(arg) {
+    console.log(arg); //e.g. 2015-11-01
+  };
+
+  ReactDOM.render(
+    &lt;Calendar callback={myCallback} /&gt;, 
+    wrapper
+  );
+</code></pre>
+
+<p>styleを自分でなんとかしたい場合は、<br />
+'defaultStyle' propsにfalseを指定すると、inline styleが適用されない。</p>
+
+<pre><code>ReactDOM.render(
+  &lt;Calendar defaultStyle={false} /&gt;, 
+  wrapper
+);
+</code></pre>
+
+<p>普段何も考えずガンガンnpmのパッケージを使っているけど、<br />
+実際どういう風に作られているのか理解できたのが一番の学びだった。</p>
+
+          </section>
+        </article>
+      </div>
+    
+    </div>
+        <footer class="global-footer">
+      <p class="global-footer__copy">torisashi.net</p>
+    </footer>
+
+  </body>
+</html>

@@ -145,6 +145,19 @@ li {
 .post--single {
   border-bottom: none;
 }
+.post--single p > img {
+  margin: 0 auto;
+  display: block;
+  max-width: 100%;
+}
+.post--single ul {
+  margin: 0 0 30px;
+  padding: 0 0 0 34px;
+}
+.post--single li {
+  margin: 0 0 14px;
+  list-style: disc;
+}
 .content p {
   font-size: 1.8rem;
   line-height: 1.5;
